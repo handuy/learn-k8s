@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nodejs-configmap-file
+  namespace: duy
+data:
+  PORT: "3000"
+  MESSAGE: "hey yo"
+  USERNAME: "ahihi"
+  configfile.json: | 
+    {
+      "PORT": "3000",
+      "MESSAGE": "Hello World"
+    }

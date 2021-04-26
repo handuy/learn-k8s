@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: duy-mongodb
+  namespace: duy
+  labels:
+    db: mongo
+spec:
+  replicas: 1
+  selector:                    
+    matchLabels:             
+      db: mongodb          
+
+  # Pod template
+  template:
+    metadata:
+      name: duy-mongodb               
+      labels:
+        db: mongodb        
+    spec:
+      containers:                       
+        - name: duy-mongodb                    
+          image: mongo      
+          imagePullPolicy: Always

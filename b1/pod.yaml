@@ -1,0 +1,16 @@
+---
+apiVersion: v1
+kind: Pod                           
+metadata:
+  name: test
+  namespace: duy
+  labels:
+    something: test-whoami
+spec:
+  containers:
+    - name: whoami
+      image: jwilder/whoami
+      ports:
+        - containerPort: 8000
+
+# kubectl -n duy port-forward --address 0.0.0.0 pod/test 8001:8000

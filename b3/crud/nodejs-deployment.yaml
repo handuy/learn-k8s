@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: duy-nodejs
+  namespace: duy
+  labels:
+    app: nodejs
+spec:
+  replicas: 5
+  selector:                    
+    matchLabels:             
+      app: nodejs          
+
+  # Pod template
+  template:
+    metadata:
+      name: nodejs-api               
+      labels:
+        app: nodejs        
+    spec:
+      containers:                       
+        - name: duy-nodejs                   
+          image: minhpq331/demo-service      
+          imagePullPolicy: Always       
+          env:
+            - name: PORT
+              value: "3000"
+
+            - name: MONGODB_URI
+              value: "mongodb://mongo-svc:8000/duy"

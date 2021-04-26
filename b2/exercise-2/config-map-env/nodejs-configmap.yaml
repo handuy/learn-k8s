@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nodejs-configmap
+  namespace: duy
+data:
+  MY_PORT: "3000"
+  MY_MESSAGE: "Hello duy"
+  MY_CONFIG: "Test app nodejs"

@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: duy-nodejs
+  namespace: duy
+  labels:
+    duy: nodejs
+spec:
+  replicas: 2
+  selector:                    
+    matchLabels:             
+      app: nodejs-api          
+
+  # Pod template
+  template:
+    metadata:
+      name: nodejs-api                
+      labels:
+        app: nodejs-api        
+    spec:
+      containers:                       
+        - name: duy-nodejs-v1                     
+          image: minhpq331/demo-deployment:v1.0      
+          imagePullPolicy: Always  
+          env:
+            - name: PORT
+              valueFrom: 
+                configMapKeyRef:
+                  name: nodejs-configmap-file
+                  key: PORT
+
+            - name: MESSAGE
+              valueFrom: 
+                configMapKeyRef:
+                  name: nodejs-configmap-file
+                  key: MESSAGE
+
+            - name: CONFIG_ENV
+              valueFrom: 
+                configMapKeyRef:
+                  name: nodejs-configmap-file
+                  key: USERNAME
+
+          volumeMounts:
+            - name: config-volume-duy
+              mountPath: /app/config.json
+              subPath: configfile.json
+
+      volumes:
+        - name: config-volume-duy
+          configMap:
+            name: nodejs-configmap-file

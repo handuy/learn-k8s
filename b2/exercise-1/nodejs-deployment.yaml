@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: duy-nodejs
+  namespace: duy
+  labels:
+    duy: nodejs
+spec:
+  replicas: 5
+  selector:                    
+    matchLabels:             
+      app: nodejs-api          
+
+  # Pod template
+  template:
+    metadata:
+      name: nodejs-api                
+      labels:
+        app: nodejs-api        
+    spec:
+      containers:                       
+        - name: duy-nodejs-v1                     
+          image: minhpq331/demo-deployment:v1.0      
+          imagePullPolicy: Always       
+          #ports:
+            #- containerPort: 3000
+          env:
+            - name: PORT
+              value: "3000"
+
+            - name: MESSAGE
+              value: "Hello world"
