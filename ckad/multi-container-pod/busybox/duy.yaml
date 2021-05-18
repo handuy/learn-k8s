@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox
+spec:
+  containers:
+  - name: busybox-1
+    image: busybox
+    command: ["echo", "Hello world", "&&", "ls -la"]
+
+  - name: busybox-2
+    image: busybox    
+    command: ["/bin/bash", "-c", "echo 'Hi there' && ls -la"]
+  restartPolicy: Never
