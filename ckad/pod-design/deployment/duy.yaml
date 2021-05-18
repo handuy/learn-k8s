@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+  labels:
+    app: nginx
+spec:
+  revisionHistoryLimit: 10
+  replicas: 10
+  selector:
+    matchLabels:
+      app: duy-nginx
+  template:
+    metadata:
+      labels:
+        app: duy-nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.19.1
+        ports:
+        - containerPort: 80
